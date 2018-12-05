@@ -72,11 +72,13 @@ def tinyMazeSearch(problem):
     w = Directions.WEST
     return  [s, s, w, s, w, w, s, w]
 
-def graphSearch(problem, fringe, fun):
+def graphSearch(problem, fringe, fun=None):
 
     startState = problem.getStartState()
     visited = set()
-    fringe.push(([], startState, 0))
+    if fun:
+        fringe.push(([], startState, 0),0)
+    else: fringe.push(([], startState, 0))
 
     while not fringe.isEmpty():
         (history, currentState, sumCost) = fringe.pop()
@@ -86,13 +88,14 @@ def graphSearch(problem, fringe, fun):
             if state not in visited:
                 newHistory = history[:]
                 newHistory.append(direction)
-                fringe = fun(fringe, newHistory, state, sumCost + cost)
+                if fun:
+                    fringe.push((newHistory, state, sumCost + cost), fun(state, sumCost + cost))
+                else: fringe.push((newHistory,state,sumCost + cost))
         visited.add(currentState)
     return []
 
-def dfsbfsFringeAction(fringe, history, state, cost):
-    fringe.push((history, state, cost))
-    return fringe
+def ucsFringeAction(state, cost):
+    return cost
 
 def depthFirstSearch(problem):
     """
@@ -109,16 +112,16 @@ def depthFirstSearch(problem):
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
 
-    return graphSearch(problem, util.Stack(), dfsbfsFringeAction)
+    return graphSearch(problem, util.Stack())
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
-    return graphSearch(problem, util.Queue(), dfsbfsFringeAction)
+    return graphSearch(problem, util.Queue())
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
-    return graphSearch(problem, util.Queue())
+    return graphSearch(problem, util.PriorityQueue(), ucsFringeAction)
 
 def nullHeuristic(state, problem=None):
     """
