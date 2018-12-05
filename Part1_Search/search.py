@@ -4,7 +4,7 @@
 # educational purposes provided that (1) you do not distribute or publish
 # solutions, (2) you retain this notice, and (3) you provide clear
 # attribution to UC Berkeley, including a link to http://ai.berkeley.edu.
-# 
+#
 # Attribution Information: The Pacman AI projects were developed at UC Berkeley.
 # The core projects and autograders were primarily created by John DeNero
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
@@ -72,29 +72,27 @@ def tinyMazeSearch(problem):
     w = Directions.WEST
     return  [s, s, w, s, w, w, s, w]
 
-def graphSearch(problem, fringe):
-    
+def graphSearch(problem, fringe, fun):
+
     startState = problem.getStartState()
     visited = set()
-    parents = dict()
-    fringe.push(startState)
+    fringe.push(([], startState, 0))
 
     while not fringe.isEmpty():
-        currentState = fringe.pop()
+        (history, currentState, sumCost) = fringe.pop()
         if problem.isGoalState(currentState):
-            path = []
-            while currentState != startState:
-                currentState,direction = parents[currentState]
-                path.append(direction)
-            path.reverse()
-            return path
-        for state,direction,_ in problem.getSuccessors(currentState):
+            return history
+        for state,direction,cost in problem.getSuccessors(currentState):
             if state not in visited:
-                fringe.push(state)
-                parents[state] = (currentState,direction)
+                newHistory = history[:]
+                newHistory.append(direction)
+                fringe = fun(fringe, newHistory, state, sumCost + cost)
         visited.add(currentState)
-
     return []
+
+def dfsbfsFringeAction(fringe, history, state, cost):
+    fringe.push((history, state, cost))
+    return fringe
 
 def depthFirstSearch(problem):
     """
@@ -110,17 +108,17 @@ def depthFirstSearch(problem):
     print "Is the start a goal?", problem.isGoalState(problem.getStartState())
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
-    return graphSearch(problem, util.Stack())
+
+    return graphSearch(problem, util.Stack(), dfsbfsFringeAction)
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
-    
-    return graphSearch(problem, util.Queue())
+    return graphSearch(problem, util.Queue(), dfsbfsFringeAction)
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    return graphSearch(problem, util.Queue())
 
 def nullHeuristic(state, problem=None):
     """
