@@ -84,14 +84,16 @@ def graphSearch(problem, fringe, fun=None):
         (history, currentState, sumCost) = fringe.pop()
         if problem.isGoalState(currentState):
             return history
-        for state,direction,cost in problem.getSuccessors(currentState):
-            if state not in visited:
+        if currentState not in visited:
+            visited.add(currentState)
+            for state,direction,cost in problem.getSuccessors(currentState):
                 newHistory = history[:]
                 newHistory.append(direction)
                 if fun:
                     fringe.push((newHistory, state, sumCost + cost), fun(state, sumCost + cost))
-                else: fringe.push((newHistory,state,sumCost + cost))
-        visited.add(currentState)
+                else: 
+                    fringe.push((newHistory,state,sumCost + cost))
+    
     return []
 
 def ucsFringeAction(state, cost):
