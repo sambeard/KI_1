@@ -129,22 +129,23 @@ def nullHeuristic(state, problem=None):
     goal in the provided SearchProblem.  This heuristic is trivial.
     """
     return 0
-def aStartFringeAction(state, cost):
-    fringe.push(state, state)
-    return fringe
 
-def manhattanHeuristic(item, problem):
+def manhattanHeuristic(state, problem):
     "The Manhattan distance heuristic for a PositionSearchProblem"
-    (_, state, sumCost) = item
-    print(state)
-    xy1 = (1,1)
+    xy1 = state
     xy2 = problem.goal
-    return sumCost + abs(xy1[0] - xy2[0]) + abs(xy1[1] - xy2[1])
+    return abs(xy1[0] - xy2[0]) + abs(xy1[1] - xy2[1])
+
+def aStarQueueFunction(item, heuristic, problem):
+    (_,state,sumCost) = item
+    return sumCost + heuristic(state,problem)
+
 
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
-    return graphSearch(problem, util.PriorityQueue(lambda i: manhattanHeuristic(i,problem)), aStartFringeAction)
+    fringe = util.PriorityQueueWithFunction(lambda (_,i,c): c + heurstic(i, problem))
+    return graphSearch(problem, util.PriorityQueue(), ucsFringeAction)
 
 
 # Abbreviations
