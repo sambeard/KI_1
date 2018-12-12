@@ -146,8 +146,8 @@ def aStarQueueFunction(item, heuristic, problem):
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
-    fringe = util.PriorityQueueWithFunction(lambda (_,i,c): c + heurstic(i, problem))
-    return graphSearch(problem, util.PriorityQueue(), ucsFringeAction)
+    fringe = util.PriorityQueueWithFunction(lambda (_,i,c): c + heuristic(i, problem))
+    return graphSearch(problem, fringe)
 
 
 # Abbreviations
