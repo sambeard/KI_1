@@ -43,8 +43,10 @@ class ValueIterationAgent(ValueEstimationAgent):
         self.iterations = iterations
         self.values = util.Counter() # A Counter is a dict with default 0
 
-        # Write value iteration code here
-        "*** YOUR CODE HERE ***"
+        for i in range(iterations-1) :
+            for s in self.mdp.getStates():
+                all = self.allActionValues(s)
+                self.values[s] = all[all.argMax()]
 
 
     def getValue(self, state):
@@ -85,8 +87,8 @@ class ValueIterationAgent(ValueEstimationAgent):
           there are no legal actions, which is the case at the
           terminal state, you should return None.
         """
-        res = allActionsFromValues(self,state)
-        if(res == None)
+        res = self.allActionValues(state)
+        if(res == None):
             return None
         return res.argMax()
 
