@@ -66,6 +66,15 @@ class ValueIterationAgent(ValueEstimationAgent):
 
         return value
 
+    def allActionValues(self, state):
+        actions = self.mdp.getPossibleActions(state)
+        if(actions == []):
+            return None
+        res = util.Counter()
+        for action in actions:
+            val = self.computeQValueFromValues(state,action)
+            res[action] = val
+        return res
 
     def computeActionFromValues(self, state):
         """
@@ -76,15 +85,9 @@ class ValueIterationAgent(ValueEstimationAgent):
           there are no legal actions, which is the case at the
           terminal state, you should return None.
         """
-        actions = self.mdp.getPossibleActions(state)
-        if(actions ==[]):
+        res = allActionsFromValues(self,state)
+        if(res == None)
             return None
-        res = util.Counter()
-        for action in actions:
-            val = self.computeQValueFromValues(state,action)
-            print(action)
-            res[action] = val
-
         return res.argMax()
 
     def getPolicy(self, state):
