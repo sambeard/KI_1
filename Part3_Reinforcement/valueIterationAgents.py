@@ -59,8 +59,13 @@ class ValueIterationAgent(ValueEstimationAgent):
           Compute the Q-value of action in state from the
           value function stored in self.values.
         """
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        value = 0
+
+        for (nextState,prob) in self.mdp.getTransitionStatesAndProbs(state, action):
+            value += prob * (self.mdp.getReward(state, action, nextState) + self.discount * self.values[nextState])
+
+        return value
+
 
     def computeActionFromValues(self, state):
         """
