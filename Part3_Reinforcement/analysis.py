@@ -21,41 +21,41 @@
 
 def question2():
     answerDiscount = 0.9
-    answerNoise = 0.01694
+    answerNoise = 0.01694       #changed
     return answerDiscount, answerNoise
 
 def question3a():
-    answerDiscount = None
-    answerNoise = None
-    answerLivingReward = None
+    answerDiscount = 0.9        # regular discount
+    answerNoise = 0.1           # slightly lower noise
+    answerLivingReward = -5.0   # high negativeliving reward
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
 def question3b():
-    answerDiscount = None
-    answerNoise = None
-    answerLivingReward = None
+    answerDiscount = 0.3        # high discount factor
+    answerNoise = 0.2           # regular noise
+    answerLivingReward = -0.5   # regular negative living reward
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
 def question3c():
-    answerDiscount = None
-    answerNoise = None
-    answerLivingReward = None
+    answerDiscount = 0.9        # regular discount factor
+    answerNoise = 0.0           # no noise
+    answerLivingReward = -2     # relatively high negative living reward
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
 def question3d():
-    answerDiscount = None
-    answerNoise = None
-    answerLivingReward = None
+    answerDiscount = 0.9        # regular discount reward
+    answerNoise = 0.2           # regular noise
+    answerLivingReward = 0      # no living reward
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
 def question3e():
-    answerDiscount = None
-    answerNoise = None
-    answerLivingReward = None
+    answerDiscount = 0.9        # regular discount reward
+    answerNoise = 0.2           # regular noise
+    answerLivingReward = 1      # positive living reward
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
