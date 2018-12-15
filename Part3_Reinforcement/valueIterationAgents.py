@@ -43,11 +43,14 @@ class ValueIterationAgent(ValueEstimationAgent):
         self.iterations = iterations
         self.values = util.Counter() # A Counter is a dict with default 0
 
-        for i in range(iterations-1) :
+        for i in range(self.iterations) :
+            temp = util.Counter();
             for s in self.mdp.getStates():
+                if(i==0):
+                    self.values[s]=0
                 all = self.allActionValues(s)
-                self.values[s] = all[all.argMax()]
-
+                temp[s] = all[all.argMax()]
+            self.values=temp
 
     def getValue(self, state):
         """
