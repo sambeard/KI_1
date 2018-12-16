@@ -27,8 +27,8 @@ def question2():
 def question3a():
     # close exit, risk cliff
     answerDiscount = 0.9        # regular discount
-    answerNoise = 0.1           # slightly lower noise
-    answerLivingReward = -5.0   # high negativeliving reward
+    answerNoise = 0.2           # slightly lower noise
+    answerLivingReward = -3.0   # high negativeliving reward
     return answerDiscount, answerNoise, answerLivingReward
 
 def question3b():
