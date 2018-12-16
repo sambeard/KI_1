@@ -33,7 +33,7 @@ def question3a():
 
 def question3b():
     # close exit, avoid cliff
-    answerDiscount = 0.3        # high discount factor
+    answerDiscount = 0.3        # low discount factor
     answerNoise = 0.2           # regular noise
     answerLivingReward = -0.5   # regular negative living reward
     return answerDiscount, answerNoise, answerLivingReward
@@ -42,14 +42,14 @@ def question3c():
     # distant exit, risk cliff
     answerDiscount = 0.9        # regular discount factor
     answerNoise = 0.0           # no noise
-    answerLivingReward = -0.5     # relatively high negative living reward
+    answerLivingReward = -0.5   # regular negative living reward
     return answerDiscount, answerNoise, answerLivingReward
 
 def question3d():
     # distant exit, avoid cliff
     answerDiscount = 0.9        # regular discount reward
     answerNoise = 0.2           # regular noise
-    answerLivingReward = 0      # no living reward
+    answerLivingReward = -0.5   # regular living reward
     return answerDiscount, answerNoise, answerLivingReward
 
 def question3e():
