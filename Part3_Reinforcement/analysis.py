@@ -42,7 +42,7 @@ def question3c():
     # distant exit, risk cliff
     answerDiscount = 0.9        # regular discount factor
     answerNoise = 0.0           # no noise
-    answerLivingReward = -2     # relatively high negative living reward
+    answerLivingReward = -0.5     # relatively high negative living reward
     return answerDiscount, answerNoise, answerLivingReward
 
 def question3d():
