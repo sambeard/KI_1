@@ -51,7 +51,7 @@ class QLearningAgent(ReinforcementAgent):
           Should return 0.0 if we have never seen a state
           or the Q node value otherwise
         """
-        return self.qValues[state, action]
+        return self.qValues[(state, action)]
 
 
     def computeValueFromQValues(self, state):
@@ -66,14 +66,14 @@ class QLearningAgent(ReinforcementAgent):
 
     def maxQTuple(self,state):
         qs = util.Counter()
-        (reward,action) = (0.0, None)                          # set to default values
+        (reward,action) = (0.0, None)                           # set to default values
         for a in self.getLegalActions(state):
             qs[(state,a)] = self.getQValue(state,a)
-        if(len(a)):
+        if(len(qs)):
             max = qs[qs.sortedKeys()[0]]
             filtered = [q[1] for q in qs if(qs[q] == max)]      # retreuve list of best actions
             action = random.choice(filtered)                    # chose random action from best actions
-            reward = max                                       # set corresponding value (max value)
+            reward = max                                        # set corresponding value (max value)
         return (reward,action)
 
     def computeActionFromQValues(self, state):
@@ -82,7 +82,7 @@ class QLearningAgent(ReinforcementAgent):
           are no legal actions, which is the case at the terminal state,
           you should return None.
         """
-        (_,action) = maxQTuple(state)
+        (_,action) = self.maxQTuple(state)
         return action
 
 
