@@ -68,7 +68,7 @@ class QLearningAgent(ReinforcementAgent):
         qs = util.Counter()
         (reward,action) = (0.0, None)                          # set to default values
         for a in self.getLegalActions(state):
-            qs[(state,a)] = self.values[(state,a)]
+            qs[(state,a)] = self.getQValue(state,a)
         if(len(a)):
             max = qs[qs.sortedKeys()[0]]
             filtered = [q[1] for q in qs if(qs[q] == max)]      # retreuve list of best actions
