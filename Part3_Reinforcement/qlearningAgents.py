@@ -100,9 +100,11 @@ class QLearningAgent(ReinforcementAgent):
         # Pick Action
         legalActions = self.getLegalActions(state)
         action = None
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
-
+        if(len(legalActions)):                                  # if any legal actions present
+            if(util.flipCoin(self.epsilon)):                    # take random action from all actions (including optimal)
+                action = random.choice(legalActions)
+            else:
+                action = self.computeActionFromQValues(state)   # take optimal action
         return action
 
     def update(self, state, action, nextState, reward):
