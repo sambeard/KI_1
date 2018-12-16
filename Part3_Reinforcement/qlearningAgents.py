@@ -116,8 +116,10 @@ class QLearningAgent(ReinforcementAgent):
           NOTE: You should never call this function,
           it will be called on your behalf
         """
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        sample = reward + self.discount * (self.computeValueFromQValues(nextState))      # calculate sample value based on reward and future rewards
+        current = self.getQValue(state,action)
+        self.qValues[(state,action)] = (1-self.alpha) * current + self.alpha * sample               # update qvalue of tuple (state,action) based on this experience
+
 
     def getPolicy(self, state):
         return self.computeActionFromQValues(state)
